@@ -13,7 +13,10 @@ This webapp is provided "as is", with no warranties of fitness or complete
 functionality. The webapp is a work-in-progress, and features may be changed
 or even eliminated without notice.
 
-Your mileage may vary.
+Your mileage may vary. Do not eat - this is not a toy. 
+Do not use while operating a motor vehicle or heavy equipment. 
+Not for resale. Hand wash only. Refrigerate after opening. 
+May contain nuts. Driver does not carry cash. 
 
 **************
 Intended Usage
