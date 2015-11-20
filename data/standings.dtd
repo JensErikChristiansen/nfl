@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    Model for a standings record derived from nfl.com//standings.
+
+    Data there is extracted into a worksheet, saved as CSV, and then processed into this format.    
+This document ends up being a snapshot of the standings, at a point in time.
+-->
+
+<!--- 
+Root element to hold a snapshot of standings. 
+asof date format: yyyymmdd
+-->
+<!ELEMENT standings (team)*>
+<!ATTLIST standings
+    asof CDATA #REQUIRED    
+  >
+
+<!--- Data for a team. -->
+<!ELEMENT team (fullname,totals,breakdown,recent)>
+<!--
+Team attributes:
+    code    the 2 or 3 letter code assigned to the team by the NFL
+    conference  3 letter code denoting the conference (National or American)
+    diviison    3 letter code, N/A for conference, "C", then N|E|S|W for division
+-->
+<!ATTLIST team
+    code (ARI|ATL|BAL|BUF|CAR|CHI|CIN|CLE|DAL|DEN|DET|GB|HOU|IND|JAC|KC|MIA|MIN|NE|NO|NYG|NYJ|OAK|PHI|PIT|SD|SEA|SF|STL|TB|TEN|WAS) #IMPLIED    
+    conference (NFC|AFC) #IMPLIED
+    division (NCN|NCE|NCS|NCW|ACN|ACE|ACS|ACW) #IMPLIED
+  >
+
+<!--- Full team Name (city/region and single word name) -->
+<!ELEMENT fullname (#PCDATA)>
+
+<!--- Summary game results, season-to-date. -->
+<!ELEMENT totals (wins,losses,ties,for,against,net)>
+
+<!--- # games won. -->
+<!ELEMENT wins (#PCDATA)>
+
+<!--- # games lost. -->
+<!ELEMENT losses (#PCDATA)>
+
+<!--- # games tied. -->
+<!ELEMENT ties (#PCDATA)>
+
+<!--- # points scored by this team. -->
+<!ELEMENT for (#PCDATA)>
+
+<!--- # points scored against this team. -->
+<!ELEMENT against (#PCDATA)>
+
+<!--- Net # of points, used to rank the teams. -->
+<!ELEMENT net (#PCDATA)>
+
+<!--- Breakdown of season-to-date results. -->
+<!ELEMENT breakdown (home,road,indiv,inconf,nonconf)>
+
+<!--- # wins at home. -->
+<!ELEMENT home (#PCDATA)>
+
+<!--- # wins on the road. -->
+<!ELEMENT road (#PCDATA)>
+
+<!--- # wins against tems in the same division. -->
+<!ELEMENT indiv (#PCDATA)>
+
+<!--- # wins against tems in the same conference. -->
+<!ELEMENT inconf (#PCDATA)>
+
+<!--- # wins against tems not in the same division. -->
+<!ELEMENT nonconf (#PCDATA)>
+
+<!--- Recent results. -->
+<!ELEMENT recent (streak,last5)>
+
+<!--- Current streak, # wins, losses or ties in a row. -->
+<!ELEMENT streak (#PCDATA)>
+
+<!--- wins - losses - ties over the last 5 games. -->
+<!ELEMENT last5 (#PCDATA)>
