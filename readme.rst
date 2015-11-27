@@ -27,10 +27,19 @@ test and run their assignment webapps, or to play with some of the
 distributed technologies we talk about in class.
 
 Students are free to fork and clone this project, or even just download it,
-for study or experimentaiton on their own systems.
+for study or experimentation on their own systems.
 
 Per assignment or lab specs, the students' webapps will need to connect to the 
 running server as part of their app's functionality.
+
+On the server this webapp is deployed to, you can access the following...
+
+-   /standings will return an XML document with the most recent standings
+-   /standings/latest will return an HTML fragment with the date of the most recent standings
+-   /rpc/since/yyyymmdd will return an array of game records, in XML, and using XML-RPC
+
+Note: the original assignment writeup showed the remote method (since) and its parameters,
+but I forgot to identify the XML-RPC endpoint (/rpc).
 
 *****
 Setup

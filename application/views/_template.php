@@ -1,6 +1,6 @@
 <?php
 if (!defined('APPPATH'))
-    exit('No direct script access allowed');
+	exit('No direct script access allowed');
 /**
  * views/_template.php
  *
@@ -21,21 +21,18 @@ if (!defined('APPPATH'))
     </head>
     <body>
         <div class="container">
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <a class="brand" href="/"><img src="/assets/images/logo.png"/></a>
-                    <h1>{title}</h1>
-		</div>
+            <div class="row">
+				<h1><img src="/assets/images/logo.png"/> {title}</h1>
             </div>           
-            <div id="content">
-                
+            <div id="content" class="row">
                 {content}
             </div>
-            <div id="footer" class="span12">
+            <div class="row">
                 Copyright &copy; 2014-2015,  <a href="mailto:someone@somewhere.com">Me</a>.
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="/assets/js/nfl.js"></script>
     </body>
 </html>

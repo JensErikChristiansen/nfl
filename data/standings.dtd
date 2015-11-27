@@ -17,7 +17,7 @@ asof date format: yyyymmdd
   >
 
 <!--- Data for a team. -->
-<!ELEMENT team (fullname,totals,breakdown,recent)>
+<!ELEMENT team (fullname?,totals,breakdown,recent?)>
 <!--
 Team attributes:
     code    the 2 or 3 letter code assigned to the team by the NFL
@@ -34,7 +34,7 @@ Team attributes:
 <!ELEMENT fullname (#PCDATA)>
 
 <!--- Summary game results, season-to-date. -->
-<!ELEMENT totals (wins,losses,ties,for,against,net)>
+<!ELEMENT totals (wins,losses,ties?,for,against,net)>
 
 <!--- # games won. -->
 <!ELEMENT wins (#PCDATA)>

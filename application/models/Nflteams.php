@@ -4,14 +4,14 @@ if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
 /**
- * Simple model to hold team codes for mapping
+ * Simple model to hold team codes for mapping, specifically looking up team codes.
  *
  * @author jim
  */
 class Nflteams extends CI_Model {
 
 	protected $codes = array(
-		'ARI Arizona Cardinals',
+		'ARI' => 'Arizona Cardinals',
 		'ATL' => 'Atlanta Falcons',
 		'BAL' => 'Baltimore Ravens',
 		'BUF' => 'Buffalo Bills',
@@ -57,17 +57,13 @@ class Nflteams extends CI_Model {
 		return $this->codes;
 	}
 
-	// return the team name for a code
+	// return the team name for a code, or an empty string if not found
 	public function name($code)
 	{
-		return (isset($this->codes['$code'])) ? $this->codes[$code] : '
-
-	
-
-	';
+		return (isset($this->codes['$code'])) ? $this->codes[$code] : '';
 	}
 
-	// lookup the code for a team
+	// lookup the code for a team, or null if not found
 	public function lookup($name)
 	{
 		foreach ($this->codes as $key->$value)

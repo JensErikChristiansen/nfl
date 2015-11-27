@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--  Model for keeping track of NFL game results.  -->
+<!ELEMENT results (game)*>
+
+<!---  Data for a game played.
+
+If the game has been played, the element's value will be the outcome,
+expressed as points for the away team and points for the home team, with a colon
+separating them, as well as possibly spaces.
+An example: "43:21" 
+
+Attributes:
+- "number" is a game number, assigned consecutively since the beginning of the season
+- "date" is the date a game was played, in the format yyyymmdd
+- "away" is the 3-letter code for the team playing an away game
+- "home" is the 3-letter code for the team playing an at-home game
+-->
+<!ELEMENT game (#PCDATA)>
+<!ATTLIST game
+    number  CDATA   #REQUIRED
+    date    CDATA   #REQUIRED
+    away    CDATA   #REQUIRED
+    home    CDATA   #REQUIRED
+>

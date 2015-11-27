@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Standings for the 2015 NFL season
--->
 <!DOCTYPE standings SYSTEM 'standings.dtd'>
-<standings asof="20151118">
+<standings asof="20150830">
+    <team code="PIT"></team>    
     <team code="ARI" conference="NFC" division="NCW">
         <fullname>Arizona Cardinals</fullname>
         <totals>
@@ -26,28 +24,4 @@ Standings for the 2015 NFL season
             <last5>4-1</last5>
         </recent>
     </team>
-
-<!--    <team code="" conference="" division="">
-        <fullname></fullname>
-        <totals>
-            <wins></wins>
-            <losses></losses>
-            <ties></ties>
-            <for></for>
-            <against></against>
-            <net></net>
-        </totals>
-        <breakdown>
-            <home></home>
-            <road></road>
-            <indiv></indiv>
-            <inconf></inconf>
-            <nonconf></nonconf>
-        </breakdown>
-        <recent>
-            <streak></streak>
-            <last5></last5>
-        </recent>
-    </team>
--->
 </standings>

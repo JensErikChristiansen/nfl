@@ -1,37 +1,76 @@
 <?php
 
 /**
- * Process an NFL standings page (CSV), producing standings.xml
+ * Provide a service - return the most recent NFL standings (XML)
  * 
- * controllers/Welcome.php
+ * Usage:	xxx/standings
+ * Returns:	the newest standings, as an XML document
+ * 
+ * Note:	XML documents can be retrieved directly, eg. xxx/data/blah.xml
+ * 			The smae would apply to the DTD ... xxx/data/standings.dtd
  *
+ * Note:	This is an example of a utility controller, meant to return an XML
+ * 			document or error message, and not a complete HTML page.
  * ------------------------------------------------------------------------
  */
-class Standings extends Application {
+class Standings extends CI_Controller {
 
-    function __construct() {
-        parent::__construct();
-    }
+	var $highest = 0; // latest date found
+	var $theone = null; // which document to return
 
-    //  return the newest standings XML
-    function index() {
-		// identify the newest file
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->helper(array('directory', 'file', 'html'));
+	}
+
+	//  return the newest standings XML
+	function index()
+	{
+		$this->_inspect();
 		// return it
-    }
+		if (!empty($this->theone))
+		{
+			echo read_file(DATAPATH . $this->theone);
+		} else
+			echo 'No suitable data found!';
+	}
 
-	// convert uploaded standings CSV files to XML ones
-	function convert() {
-		// identify CSV files
-        $this->load->helper('directory');
-        $candidates = directory_map(DATAPATH);
-        sort($candidates);
-        foreach ($candidates as $file) {
-            if (substr_compare($file, CSVSUFFIX, strlen($file) - strlen(CSVSUFFIX), strlen(CSVSUFFIX)) === 0) {
-                // trim the suffix
-                $filename = substr($file, 0, -4);
-				echo $filename . BR;
+	//  return a fragment with the latest date
+	function latest()
+	{
+		$this->_inspect();
+		$xml = simplexml_load_file(DATAPATH . $this->theone);
+		$thedate = (string) $xml['asof'];
+		// invoke the parser without third parameter, so results returned to browser
+		$this->parser->parse('show_latest', array('asof' => $thedate));
+	}
+
+	// protected function to dig up details
+	//	yes, the code is sloppy ... it would tighten up with refactoring  :-/
+	function _inspect()
+	{
+		// identify the newest file
+		$candidates = directory_map(DATAPATH);
+		sort($candidates);
+		foreach ($candidates as $file)
+		{
+			// looking for XML files
+			if (substr_compare($file, XMLSUFFIX, strlen($file) - strlen(XMLSUFFIX), strlen(XMLSUFFIX)) === 0)
+			{
+				// that start with "standings-"
+				if (substr_compare($file, 'standings-', 0, 10, true) === 0)
+				{
+					$filedate = substr($file, -12); // grab the last 10 characters
+					$filedate = substr($filedate, 0, -4); // strip the extension
+					if ($filedate > $this->highest)
+					{
+						$this->highest = $filedate;
+						$this->theone = $file;
+					}
+				}
 			}
-        }
+		}
 	}
 
 }
