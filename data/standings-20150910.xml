@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE standings SYSTEM 'standings.dtd'>
 <standings asof="20150830">
-    <team code="PIT"></team>    
+<!--    <team code="PIT"></team>     -->
     <team code="ARI" conference="NFC" division="NCW">
         <fullname>Arizona Cardinals</fullname>
         <totals>
