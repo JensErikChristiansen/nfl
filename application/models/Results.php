@@ -16,16 +16,16 @@ class Results extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		$xml = simplexml_load_file(DATAPATH . 'scores.xml');
+		$this->xml = simplexml_load_file(DATAPATH . 'results.xml');
 	}
 
 	// return games after a specficied data
-	public function since($lastdate)
+	public function since($lastdate='20150831')
 	{
 		$answer = array();
-		foreach ($xml->children() as $game)
+		foreach ($this->xml->children() as $game)
 		{
-			if ($game['date'] > $lastdate)
+			if ($lastdate < (string)$game['date'])
 				$answer[] = $game;
 		}
 		return $answer;

@@ -7,7 +7,7 @@
  *
  * ------------------------------------------------------------------------
  */
-class Rpc extends Application {
+class Rpc extends CI_Controller {
 
 	function __construct()
 	{
@@ -20,8 +20,9 @@ class Rpc extends Application {
 		$this->load->library('xmlrpc');
 		$this->load->library('xmlrpcs');
 //	$this->xmlrpc->set_debug(TRUE);
-
+		// Had issues with only a single remote method defined, so added a bogus one.
 		$config['functions']['since'] = array('function' => 'rpc.scores');
+		$config['functions']['since2'] = array('function' => 'rpc.scores');
 		$config['object'] = $this;
 
 		$this->xmlrpcs->initialize($config);
@@ -40,7 +41,13 @@ class Rpc extends Application {
 		$response = array();
 		// wrap each game result
 		foreach ($list as $one)
-			$response[] = array((array) $one, 'struct');
+		{
+			// extract the attributes
+			$attributes = array();
+			foreach ($one->attributes() as $key => $val)
+				$attributes[$key] = (string)$val;
+			$response[] = array($attributes, 'struct');
+		}
 		// and wrap the collection of results
 		$response = array($response, 'array');
 
