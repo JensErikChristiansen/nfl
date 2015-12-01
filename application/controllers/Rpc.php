@@ -45,7 +45,8 @@ class Rpc extends CI_Controller {
 			// extract the attributes
 			$attributes = array();
 			foreach ($one->attributes() as $key => $val)
-				$attributes[$key] = (string)$val;
+				$attributes[$key] = (string) $val;
+			$attributes['score'] = (string) $one;
 			$response[] = array($attributes, 'struct');
 		}
 		// and wrap the collection of results
